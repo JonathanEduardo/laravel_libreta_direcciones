@@ -21,5 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::get('/contacts', [ContactController::class, 'index']);
+Route::middleware('api.key')->get('/contacts', [ContactController::class, 'index']);
 

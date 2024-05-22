@@ -15,7 +15,9 @@ class ContactController extends Controller
     {
         //
         $contacts = Contact::paginate(10);
-        return response()->json($contacts);
+        $array[0] = $contacts;
+
+        return response()->json($array);
     }
 
     /**
