@@ -30,13 +30,13 @@ class ContactController extends Controller
     public function detailsAdress()
     {
         //
-        $contacts = Contact::where("id",1)->get();
+        $contacts = Contact::with(['phoneNumbers', 'emails', 'addresses'])->findOrFail(20);
         // $contacts = Addres::where('contact_id', 1)->All(10);
         // $contacts = Email::where('contact_id', 1)->All(10);
         // $contacts = PhoneNumer::where('contact_id', 1)->All(10);
         $arrayData = array([
                 "res" => 'true', 
-                "data"=> $contacts[0]->emails]);
+                "data"=> $contacts]);
         
         return response()->json($arrayData);
        
