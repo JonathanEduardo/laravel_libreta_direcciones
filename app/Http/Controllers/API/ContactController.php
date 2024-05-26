@@ -18,30 +18,32 @@ class ContactController extends Controller
         //
         $contacts = Contact::paginate(10);
         $arrayData = array([
-                "res" => 'true', 
+                "res" => 'true',
                 "data"=> $contacts]);
-        
-        return response()->json($arrayData);
-       
 
-        
+        return response()->json($arrayData);
+
+
+
     }
 
-    public function detailsAdress()
+    public function detailsAdress($idContact)
     {
         //
-        $contacts = Contact::with(['phoneNumbers', 'emails', 'addresses'])->findOrFail(20);
+        $contacts = Contact::with(['phoneNumbers', 'emails', 'addresses'])->findOrFail($idContact);
         // $contacts = Addres::where('contact_id', 1)->All(10);
         // $contacts = Email::where('contact_id', 1)->All(10);
         // $contacts = PhoneNumer::where('contact_id', 1)->All(10);
         $arrayData = array([
-                "res" => 'true', 
+                "res" => 'true',
                 "data"=> $contacts]);
-        
-        return response()->json($arrayData);
-       
 
-        
+        return response()->json([
+            "res" => 'true',
+            "data"=> $contacts]);
+
+
+
     }
 
     /**

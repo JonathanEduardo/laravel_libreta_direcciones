@@ -23,5 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/contacts', [ContactController::class, 'index']);
 
-Route::get('/details', [ContactController::class, 'detailsAdress']);
+Route::get('/details/{id}', [ContactController::class, 'detailsAdress']);
 
