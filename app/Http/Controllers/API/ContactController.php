@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Email;
 use App\Models\PhoneNumer;
+use App\Models\Address;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -46,6 +47,22 @@ class ContactController extends Controller
 
     }
 
+
+    public function addAddress(Request $request){
+
+        // Validar los datos recibidos
+        $validatedData = $request->validate([
+            'contact_id' => 'required',
+            'address' => 'required',
+            'created_at' => 'required',
+        ]);
+
+        $address = Address::create($validatedData);
+
+        return response()->json([
+            "res" => true
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */
