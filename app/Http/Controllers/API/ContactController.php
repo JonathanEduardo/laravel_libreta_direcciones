@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Email;
+use App\Models\PhoneNumber;
 use App\Models\PhoneNumer;
 use App\Models\Address;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class ContactController extends Controller
     public function index()
     {
         //
-        $contacts = Contact::paginate(10);
+        $contacts = Contact::orderBy('id','desc')->paginate(10);
         $arrayData = array([
                 "res" => 'true',
                 "data"=> $contacts]);
@@ -48,6 +49,22 @@ class ContactController extends Controller
     }
 
 
+    public function addContact(Request $request){
+
+        // Validar los datos recibidos
+        $validatedData = $request->validate([
+            'name' => 'required'
+        ]);
+
+        $address = Contact::create($validatedData);
+
+        return response()->json([
+            "res" => true,
+            "id" => $address->id,
+        ]);
+    }
+
+
     public function addAddress(Request $request){
 
         // Validar los datos recibidos
@@ -60,7 +77,44 @@ class ContactController extends Controller
         $address = Address::create($validatedData);
 
         return response()->json([
-            "res" => true
+            "res" => true,
+            "id" => $address->id,
+        ]);
+    }
+
+
+    public function addEmail(Request $request){
+
+        // Validar los datos recibidos
+        $validatedData = $request->validate([
+            'contact_id' => 'required',
+            'email' => 'required',
+            'created_at' => 'required',
+        ]);
+
+        $address = Email::create($validatedData);
+
+        return response()->json([
+            "res" => true,
+            "id" => $address->id,
+        ]);
+    }
+
+
+    public function addPhone(Request $request){
+
+        // Validar los datos recibidos
+        $validatedData = $request->validate([
+            'contact_id' => 'required',
+            'phone_number' => 'required',
+            'created_at' => 'required',
+        ]);
+
+        $address = PhoneNumber::create($validatedData);
+
+        return response()->json([
+            "res" => true,
+            "id" => $address->id,
         ]);
     }
     /**

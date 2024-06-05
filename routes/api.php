@@ -23,4 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/contacts', [ContactController::class, 'index']);
 Route::get('/details/{id}', [ContactController::class, 'detailsAdress']);
+Route::post('/contact/add', [ContactController::class, 'addContact']);  // guardar una direccion nueva
 Route::post('/addresses', [ContactController::class, 'addAddress']);  // guardar una direccion nueva
+Route::post('/phones', [ContactController::class, 'addPhone']);  // guardar una direccion nueva
+Route::post('/emails', [ContactController::class, 'addEmail']);  // guardar una direccion nueva

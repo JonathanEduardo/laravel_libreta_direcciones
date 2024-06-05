@@ -9,6 +9,9 @@ class Contact extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+    ];
     public function emails()
     {
         return $this->hasMany(Email::class);
