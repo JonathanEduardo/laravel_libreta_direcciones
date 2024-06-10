@@ -49,6 +49,9 @@ class ContactController extends Controller
     }
 
 
+ 
+
+
     public function addContact(Request $request){
 
         // Validar los datos recibidos
@@ -116,6 +119,29 @@ class ContactController extends Controller
             "res" => true,
             "id" => $address->id,
         ]);
+    }
+
+
+    public function updatePhone(Request $request, $id ){
+      
+
+          // Validar los datos recibidos
+          $validatedData = $request->validate([
+            'phone_number' => 'required',
+         ]);
+
+       
+
+
+         $info = PhoneNumber::findOrFail($id);
+         $info->update(['phone_number' => $validatedData['phone_number']]);
+
+
+         return response()->json([
+            "res" => true,
+            "id" => $info->id,
+        ]);
+
     }
     /**
      * Show the form for creating a new resource.

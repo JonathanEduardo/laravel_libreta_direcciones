@@ -27,3 +27,7 @@ Route::post('/contact/add', [ContactController::class, 'addContact']);  // guard
 Route::post('/addresses', [ContactController::class, 'addAddress']);  // guardar una direccion nueva
 Route::post('/phones', [ContactController::class, 'addPhone']);  // guardar una direccion nueva
 Route::post('/emails', [ContactController::class, 'addEmail']);  // guardar una direccion nueva
+
+Route::put('/addresses/update', [ContactController::class, 'updateAddress']);  // guardar una direccion nueva
+Route::put('/phones/update/{id}', [ContactController::class, 'updatePhone']);  // guardar una direccion nueva
+Route::put('/emails/update', [ContactController::class, 'updateEmail']);  // guardar una direccion nueva
