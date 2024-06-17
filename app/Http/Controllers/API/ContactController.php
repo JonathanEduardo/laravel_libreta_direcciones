@@ -49,7 +49,7 @@ class ContactController extends Controller
     }
 
 
- 
+
 
 
     public function addContact(Request $request){
@@ -65,6 +65,21 @@ class ContactController extends Controller
             "res" => true,
             "id" => $address->id,
         ]);
+    }
+
+    public function deleteContact($idContact){
+        $contact = Contact::findOrFail($idContact);
+
+
+        //eliminar los registros relacionados
+        $contact->addresses()->delete();
+        $contact->emails()->delete();
+
+
+        return response()->json([
+            "res" => 'true',
+        ]);
+
     }
 
 
@@ -104,6 +119,51 @@ class ContactController extends Controller
     }
 
 
+    public function updateAddress(Request $request, $id ){
+
+
+        // Validar los datos recibidos
+        $validatedData = $request->validate([
+          'address' => 'required',
+       ]);
+
+
+
+
+       $info = Address::findOrFail($id);
+       $info->update(['address' => $validatedData['address']]);
+
+
+       return response()->json([
+          "res" => true,
+          "id" => $info->id,
+      ]);
+
+  }
+
+    public function updateEmail(Request $request, $id ){
+
+
+        // Validar los datos recibidos
+        $validatedData = $request->validate([
+          'email' => 'required',
+       ]);
+
+
+
+
+       $info = Email::findOrFail($id);
+       $info->update(['email' => $validatedData['email']]);
+
+
+       return response()->json([
+          "res" => true,
+          "id" => $info->id,
+      ]);
+
+  }
+
+
     public function addPhone(Request $request){
 
         // Validar los datos recibidos
@@ -123,14 +183,14 @@ class ContactController extends Controller
 
 
     public function updatePhone(Request $request, $id ){
-      
+
 
           // Validar los datos recibidos
           $validatedData = $request->validate([
             'phone_number' => 'required',
          ]);
 
-       
+
 
 
          $info = PhoneNumber::findOrFail($id);
